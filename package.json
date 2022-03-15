@@ -3,10 +3,12 @@
   "version": "1.0.0",
   "description": "This is the backend",
   "scripts": {
-    "start": "node ./src/index.js"
+    "start": "node ./src/index.js",
+    "dev": "npx nodemon ./src/index.js"
   },
   "dependencies": {
-    "express": "4.17.3"
+    "express": "4.17.3",
+    "mongodb": "^4.4.1"
   },
   "devDependencies": {
     "dotenv": "^16.0.0"
