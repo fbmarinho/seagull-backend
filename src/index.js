@@ -25,7 +25,7 @@ app.get("/", (req, res) => {
 
       var db = client.db("db");
 
-      db.collection("sondas").findOne({}, function (findErr, result) {
+      db.collection("sondas").find({}, function (findErr, result) {
         if (findErr) throw findErr;
         console.log(result);
         res.json(result);
