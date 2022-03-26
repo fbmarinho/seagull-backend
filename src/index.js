@@ -1,25 +1,19 @@
 if (!process.env.NODE_ENV) {
   require("dotenv").config();
 }
-const sondas = require("./Routes/sonda");
-
+const port = process.env.PORT; //Use this for HEROKU
 const express = require("express");
+const mongoose = require("mongoose");
 const app = express();
-const port = process.env.PORT;
+app.use(express.json());
 
-const myLogger = function (req, res, next) {
-  console.log("LOGGED");
-  next();
-};
+mongoose.connect(process.env.ATLAS_URI);
+const db = mongoose.connection;
 
-app.use(myLogger); //Middleware
+db.on("error", (error) => console.error(error));
+db.once("open", () => console.log("Connected to Atlas"));
 
-app.use("/sondas", sondas);
+const sondasRouter = require("./routes/sondas");
+app.use("/sondas", sondasRouter);
 
-app.get("/", (req, res) => {
-  res.send("Hello World !");
-});
-
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
-});
+app.listen(port, () => console.log(`Port: ${port}`));
