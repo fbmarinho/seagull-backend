@@ -16,4 +16,8 @@ db.once("open", () => console.log("Connected to Atlas"));
 const sondasRouter = require("./routes/sondas");
 app.use("/sondas", sondasRouter);
 
+app.get("/", (req, res) => {
+  res.json({ message: "Welcome" });
+});
+
 app.listen(port, () => console.log(`Port: ${port}`));
